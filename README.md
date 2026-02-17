@@ -82,7 +82,7 @@ npm run report
 
 ## Navigation Rules
 
-Navigation within the app is done **exclusively via `click`** actions — no direct `goto('/some-path')` calls beyond the base URL. This mirrors real user behaviour and catches nav regressions.
+Navigation within the app is done **exclusively via `click`** actions - no direct `goto('/some-path')` calls beyond the base URL. This mirrors real user behaviour and catches nav regressions.
 
 Example flow:
 
@@ -98,7 +98,7 @@ Example flow:
 | -------------------- | ----------------------------------------------------------------------------- |
 | **Classes**          | All page objects, Actions, Assertions                                         |
 | **Constructors**     | Every class accepts `Page` via `constructor(page: Page)`                      |
-| **Plain objects**    | `DataGenerator` — groups pure functions, no need for a class                  |
+| **Plain objects**    | `DataGenerator` - groups pure functions, no need for a class                  |
 | **Type annotations** | Method return types (`Promise<void>`), property types (`readonly page: Page`) |
 | **Destructuring**    | `{ page }` in `test.beforeEach` fixture                                       |
 
@@ -108,13 +108,13 @@ Example flow:
 
 ### Elements
 
-- ✅ Text Box — fill & submit form, verify output
-- ✅ Check Box — expand tree, select item
-- ✅ Radio Button — select Yes / Impressive
-- ✅ Web Tables — add new record, search existing record
-- ✅ Buttons — double click, right click, dynamic click
+- ✅ Text Box - fill & submit form, verify output
+- ✅ Check Box - expand tree, select item
+- ✅ Radio Button - select Yes / Impressive
+- ✅ Web Tables - add new record, search existing record
+- ✅ Buttons - double click, right click, dynamic click
 
 ### Forms
 
-- ✅ Practice Form — full valid submission, name in modal
-- ✅ Practice Form — empty submission stays on page
+- ✅ Practice Form - full valid submission, name in modal
+- ✅ Practice Form - empty submission stays on page
