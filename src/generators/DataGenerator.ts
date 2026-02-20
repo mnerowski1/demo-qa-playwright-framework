@@ -1,13 +1,6 @@
-/**
- * TypeScript OBJECT (plain object / namespace pattern): DataGenerator
- * Used to produce random test data so tests stay independent from each other.
- * No class needed here — pure functions grouped into a simple exported object.
- */
-
 export const DataGenerator = {
-  /**
-   * Returns a random first name from a small list.
-   */
+  // Returns a random first and last name from a small list.
+
   firstName(): string {
     const names = ["Alice", "Bob", "Charlie", "Diana", "Edward"];
     return names[Math.floor(Math.random() * names.length)];
@@ -18,9 +11,8 @@ export const DataGenerator = {
     return names[Math.floor(Math.random() * names.length)];
   },
 
-  /**
-   * Generates a simple valid email from the provided name.
-   */
+  // Generates a simple valid email from the provided name.
+
   email(name: string = "test"): string {
     const clean = name.toLowerCase().replace(/\s+/g, "");
     return `${clean}${Math.floor(Math.random() * 9000 + 1000)}@test.com`;
@@ -38,11 +30,11 @@ export const DataGenerator = {
   },
 
   age(): string {
-    return String(Math.floor(Math.random() * 40 + 20)); // 20–59
+    return String(Math.floor(Math.random() * 40 + 20));
   },
 
   salary(): string {
-    return String(Math.floor(Math.random() * 90000 + 10000)); // 10k–99k
+    return String(Math.floor(Math.random() * 90000 + 10000));
   },
 
   department(): string {

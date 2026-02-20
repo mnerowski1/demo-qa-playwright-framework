@@ -1,9 +1,5 @@
 import { Page } from "@playwright/test";
 
-/**
- * TypeScript CLASS: Represents the Forms section.
- * Contains locators for the Practice Form page.
- */
 export class FormsPage {
   readonly page: Page;
 
@@ -15,7 +11,7 @@ export class FormsPage {
     await this.page.click('span:has-text("Practice Form")');
   }
 
-  // --- Locators ---
+  // Locators
 
   get firstNameInput() {
     return this.page.locator("#firstName");

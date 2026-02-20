@@ -1,44 +1,26 @@
-import { test, Page } from "@playwright/test";
-import { HomePage } from "../../src/pages/HomePage";
-import { FormsPage } from "../../src/pages/FormsPage";
-import { Actions } from "../../src/actions/Actions";
-import { Assertions } from "../../src/assertions/Assertions";
+import { test } from "../test-fixtures";
 import { DataGenerator } from "../../src/generators/DataGenerator";
 
-/**
- * TypeScript usage note:
- * - Variables typed as class instances (`FormsPage`, `Actions`, etc.)
- * - `new ClassName(page)` is called in beforeEach to get fresh instances per test
- */
-
-let homePage: HomePage;
-let formsPage: FormsPage;
-let actions: Actions;
-let assertions: Assertions;
-
-test.beforeEach(async ({ page }: { page: Page }) => {
-  homePage = new HomePage(page);
-  formsPage = new FormsPage(page);
-  actions = new Actions(page);
-  assertions = new Assertions(page);
-
-  // Navigate via clicks — no goto('/forms')
-  await homePage.open();
+test.beforeEach(async ({ homePage, formsPage }) => {
   await homePage.clickFormsCard();
   await formsPage.goToPracticeForm();
 });
 
-// ---------------------------------------------------------------------------
 // PRACTICE FORM
-// ---------------------------------------------------------------------------
 
 test.describe("Practice Form", () => {
-  test("should submit the form successfully and show confirmation modal", async () => {
+  test("should submit the form successfully and show confirmation modal", async ({
+    formsPage,
+    actions,
+    assertions,
+  }) => {
+    // Arrange
     const firstName = DataGenerator.firstName();
     const lastName = DataGenerator.lastName();
     const email = DataGenerator.email(firstName);
     const mobile = DataGenerator.mobile();
 
+    // Act
     await actions.fill(formsPage.firstNameInput, firstName);
     await actions.fill(formsPage.lastNameInput, lastName);
     await actions.fill(formsPage.emailInput, email);
@@ -48,6 +30,7 @@ test.describe("Practice Form", () => {
     await actions.fill(formsPage.currentAddressInput, DataGenerator.address());
     await actions.scrollAndClick(formsPage.submitButton);
 
+    // Assert
     // Confirmation modal should appear
     await assertions.isVisible(formsPage.confirmationModal);
     await assertions.hasText(
@@ -56,16 +39,23 @@ test.describe("Practice Form", () => {
     );
   });
 
-  test("should display student name in confirmation modal", async () => {
+  test("should display student name in confirmation modal", async ({
+    formsPage,
+    actions,
+    assertions,
+  }) => {
+    // Arrange
     const firstName = "John";
     const lastName = "Doe";
 
+    // Act
     await actions.fill(formsPage.firstNameInput, firstName);
     await actions.fill(formsPage.lastNameInput, lastName);
     await actions.click(formsPage.genderFemaleLabel);
     await actions.fill(formsPage.mobileInput, "0712345678");
     await actions.scrollAndClick(formsPage.submitButton);
 
+    // Assert
     await assertions.isVisible(formsPage.confirmationModal);
     await assertions.hasText(
       formsPage.confirmationModal,
@@ -74,16 +64,24 @@ test.describe("Practice Form", () => {
   });
 
   test("should not submit the form without required fields", async ({
+    formsPage,
+    actions,
+    assertions,
     page,
   }) => {
-    // Try to submit with no data — form should not show the modal
+    // Arrange
+    // No data filled
+
+    // Act
+    // Try to submit with no data - form should not show the modal
     await actions.scrollAndClick(formsPage.submitButton);
 
-    // Modal should NOT be visible — page stays on the form
+    // Assert
+    // Modal should NOT be visible - page stays on the form
     const modal = page.locator(".modal-content");
     const isVisible = await modal.isVisible().catch(() => false);
 
-    // If modal is not visible the test passes — we just check the URL stayed the same
+    // If modal is not visible the test passes - we just check the URL stayed the same
     await assertions.urlContains("automation-practice-form");
   });
 });

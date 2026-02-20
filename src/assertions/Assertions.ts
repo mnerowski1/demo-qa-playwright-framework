@@ -1,9 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 
-/**
- * TypeScript CLASS: Wraps Playwright `expect` assertions into readable methods.
- * Centralising assertions here makes tests shorter and assertion messages consistent.
- */
+// Wraps Playwright `expect` assertions into readable methods.
+
 export class Assertions {
   readonly page: Page;
 

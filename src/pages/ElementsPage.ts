@@ -1,9 +1,5 @@
 import { Locator, Page } from "@playwright/test";
 
-/**
- * TypeScript CLASS: Represents the Elements section sidebar and sub-pages.
- * Each method navigates to a specific element sub-page using click (not goto).
- */
 export class ElementsPage {
   readonly page: Page;
 
@@ -11,29 +7,34 @@ export class ElementsPage {
     this.page = page;
   }
 
-  // --- Sidebar navigation via clicks ---
+  // Sidebar navigation via clicks
 
+  async goTo(section: string): Promise<void> {
+    await this.page.click(`span:has-text("${section}")`);
+  }
+
+  // Specific methods for clarity (can be removed if using generic)
   async goToTextBox(): Promise<void> {
-    await this.page.click('span:has-text("Text Box")');
+    await this.goTo("Text Box");
   }
 
   async goToCheckBox(): Promise<void> {
-    await this.page.click('span:has-text("Check Box")');
+    await this.goTo("Check Box");
   }
 
   async goToRadioButton(): Promise<void> {
-    await this.page.click('span:has-text("Radio Button")');
+    await this.goTo("Radio Button");
   }
 
   async goToWebTables(): Promise<void> {
-    await this.page.click('span:has-text("Web Tables")');
+    await this.goTo("Web Tables");
   }
 
   async goToButtons(): Promise<void> {
-    await this.page.click('span:has-text("Buttons")');
+    await this.goTo("Buttons");
   }
 
-  // --- Text Box locators ---
+  // Text Box locators
 
   get fullNameInput() {
     return this.page.locator("#userName");
@@ -59,7 +60,7 @@ export class ElementsPage {
     return this.page.locator("#output");
   }
 
-  // --- Check Box locators ---
+  // Check Box locators
 
   get expandAllButton() {
     return this.page.locator(".rc-tree-switcher");
@@ -73,7 +74,7 @@ export class ElementsPage {
     return this.page.locator(".display-result");
   }
 
-  // --- Radio Button locators ---
+  // Radio Button locators
 
   get yesRadio() {
     return this.page.locator('label[for="yesRadio"]');
@@ -87,7 +88,7 @@ export class ElementsPage {
     return this.page.locator(".mt-3");
   }
 
-  // --- Web Tables locators ---
+  // Web Tables locators
 
   get addButton() {
     return this.page.locator("#addNewRecordButton");
@@ -130,7 +131,7 @@ export class ElementsPage {
     return this.page.locator("#submit");
   }
 
-  // --- Buttons locators ---
+  // Buttons locators
 
   get doubleClickButton() {
     return this.page.locator("#doubleClickBtn");
@@ -156,7 +157,7 @@ export class ElementsPage {
     return this.page.locator("#dynamicClickMessage");
   }
 
-  //Web Tables functions
+  // Web Tables functions
 
   async getFirstNames(): Promise<string[]> {
     const cells: Locator[] = await this.page.locator("tr td:first-child").all();
