@@ -11,7 +11,7 @@ Built with **Playwright** + **TypeScript** using the **Page Object Model**.
 ```
 demoqa-playwright/
 ├── src/
-│   ├── pages/          # Page Objects — locators & navigation
+│   ├── pages/          # Page Objects - locators & navigation
 │   │   ├── HomePage.ts
 │   │   ├── ElementsPage.ts
 │   │   └── FormsPage.ts
