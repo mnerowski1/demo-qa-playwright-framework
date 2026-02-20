@@ -22,10 +22,13 @@ demoqa-playwright/
 │   └── generators/     # Random test data generators
 │       └── DataGenerator.ts
 ├── tests/
+│   ├── test-fixtures.ts
 │   ├── elements/
 │   │   └── elements.spec.ts
 │   └── forms/
 │       └── forms.spec.ts
+├── playwright-report/  # HTML test reports
+├── test-results/       # Test execution artifacts
 ├── playwright.config.ts
 ├── tsconfig.json
 └── package.json
@@ -94,13 +97,14 @@ Example flow:
 
 ## TypeScript Concepts Used
 
-| Concept              | Where                                                                         |
-| -------------------- | ----------------------------------------------------------------------------- |
-| **Classes**          | All page objects, Actions, Assertions                                         |
-| **Constructors**     | Every class accepts `Page` via `constructor(page: Page)`                      |
-| **Plain objects**    | `DataGenerator` - groups pure functions, no need for a class                  |
-| **Type annotations** | Method return types (`Promise<void>`), property types (`readonly page: Page`) |
-| **Destructuring**    | `{ page }` in `test.beforeEach` fixture                                       |
+| Concept              | Where                                                                       |
+| -------------------- | --------------------------------------------------------------------------- |
+| **Classes**          | All page objects, Actions, Assertions                                       |
+| **Constructors**     | Every class accepts `Page` via `constructor(page: Page)`                    |
+| **Type imports**     | `Locator` from `@playwright/test` instead of `ReturnType<Page["locator"]>`  |
+| **Plain objects**    | `DataGenerator` - groups pure functions, no need for a class                |
+| **Type annotations** | Method return types (`Promise<void>`), parameter types (`locator: Locator`) |
+| **Destructuring**    | `{ page }` in `test.beforeEach` fixture                                     |
 
 ---
 
