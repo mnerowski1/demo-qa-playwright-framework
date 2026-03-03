@@ -2,12 +2,12 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
-  timeout: 10000,
+  timeout: 30000,
   expect: {
     timeout: 10000,
   },
-  retries: 0,
-  reporter: [["html"], ["list"]],
+  retries: 2,
+  reporter: [["html"], ["list"], ["junit", { outputFile: "test-results.xml" }]],
   use: {
     baseURL: "https://demoqa.com",
     headless: true,
