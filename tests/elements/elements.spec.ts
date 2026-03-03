@@ -98,13 +98,12 @@ test.describe("Web Tables", () => {
     // Arrange
     await elementsPage.goToWebTables();
 
-    await actions.click(elementsPage.addButton);
-
     const firstName = DataGenerator.firstName();
     const lastName = DataGenerator.lastName();
     const email = DataGenerator.email(firstName);
 
     // Act
+    await actions.click(elementsPage.addButton);
     await actions.fill(elementsPage.firstNameInput, firstName);
     await actions.fill(elementsPage.lastNameInput, lastName);
     await actions.fill(elementsPage.emailInputModal, email);
@@ -187,7 +186,7 @@ test.describe("Buttons", () => {
     await elementsPage.goToButtons();
 
     // Act
-    await actions.scrollAndClick(elementsPage.dynamicClickButton);
+    await actions.scrollAndClick(elementsPage.clickMeButton);
 
     // Assert
     await assertions.hasText(

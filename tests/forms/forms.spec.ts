@@ -31,7 +31,6 @@ test.describe("Practice Form", () => {
     await actions.scrollAndClick(formsPage.submitButton);
 
     // Assert
-    // Confirmation modal should appear
     await assertions.isVisible(formsPage.confirmationModal);
     await assertions.hasText(
       formsPage.modalTitle,
@@ -73,15 +72,12 @@ test.describe("Practice Form", () => {
     // No data filled
 
     // Act
-    // Try to submit with no data - form should not show the modal
     await actions.scrollAndClick(formsPage.submitButton);
 
     // Assert
-    // Modal should NOT be visible - page stays on the form
     const modal = page.locator(".modal-content");
     const isVisible = await modal.isVisible().catch(() => false);
 
-    // If modal is not visible the test passes - we just check the URL stayed the same
     await assertions.urlContains("automation-practice-form");
   });
 });

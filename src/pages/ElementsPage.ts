@@ -141,7 +141,7 @@ export class ElementsPage {
     return this.page.locator("#rightClickBtn");
   }
 
-  get dynamicClickButton() {
+  get clickMeButton() {
     return this.page.locator('button:has-text("Click Me")').last();
   }
 
