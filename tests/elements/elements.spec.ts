@@ -192,6 +192,7 @@ test.describe("Buttons", () => {
     await assertions.hasText(
       elementsPage.dynamicClickMessage,
       "You have done a dynamic click",
+      //ci/cd test
     );
   });
 });
