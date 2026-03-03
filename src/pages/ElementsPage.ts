@@ -146,7 +146,7 @@ export class ElementsPage {
   }
 
   get doubleClickMessage() {
-    return this.page.locator("#doubleClickMessage");
+    return this.page.locator("#zzdoubleClickMessage");
   }
 
   get rightClickMessage() {
